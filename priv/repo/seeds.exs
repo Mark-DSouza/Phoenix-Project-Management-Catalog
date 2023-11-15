@@ -9,3 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+for priority <- ["Critical", "High", "Medium", "Low"] do
+  {:ok, _} = Projects.Checklist.create_priority(%{name: priority})
+end

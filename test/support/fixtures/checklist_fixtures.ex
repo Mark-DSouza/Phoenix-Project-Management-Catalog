@@ -18,4 +18,18 @@ defmodule Projects.ChecklistFixtures do
 
     project
   end
+
+  @doc """
+  Generate a priority.
+  """
+  def priority_fixture(attrs \\ %{}) do
+    {:ok, priority} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> Projects.Checklist.create_priority()
+
+    priority
+  end
 end
