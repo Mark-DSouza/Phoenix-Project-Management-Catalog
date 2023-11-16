@@ -11,7 +11,7 @@
 <.list>
   <:item title="Title"><%= @project.title %></:item>
   <:item title="Description"><%= @project.description %></:item>
-  <:item title="Priority"><%= @project.priority %></:item>
+  <:item title="Priority"><%= capitalize_atom(@project.priority) %></:item>
   <:item title="Created At"><%= @project.inserted_at %></:item>
   <:item title="Updated At"><%= @project.updated_at %></:item>
 </.list>

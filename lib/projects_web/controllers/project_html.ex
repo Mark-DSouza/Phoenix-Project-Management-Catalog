@@ -11,6 +11,10 @@ defmodule ProjectsWeb.ProjectHTML do
 
   def project_form(assigns)
 
+  def capitalize_atom(atom) when is_atom(atom) do
+    atom |> to_string() |> String.capitalize()
+  end
+
   def priority_opts(changeset) do
     existing_priority = changeset |> Ecto.Changeset.get_change(:priority, [])
 
@@ -18,7 +22,7 @@ defmodule ProjectsWeb.ProjectHTML do
       Ecto.Enum.values(Projects.Checklist.Project, :priority),
       fn priority ->
       [
-        key: priority |> to_string() |> String.capitalize(),
+        key: capitalize_atom(priority),
         value: priority,
         selected: priority == existing_priority
       ] end
