@@ -4,11 +4,7 @@
   </.error>
   <.input field={f[:title]} type="text" label="Title" />
   <.input field={f[:description]} type="text" label="Description" />
-
-  <.radio_fieldset field={f[:priority]}
-    options={Ecto.Enum.dump_values(Projects.Checklist.Project, :priority)}
-    checked_value={f.params["priority"]}
-  />
+  <.input field={f[:priority]} type="select" options={priority_opts(@changeset)} />
   
   <:actions>
     <.button>Save Project</.button>
