@@ -5,6 +5,7 @@
   <.input field={f[:title]} type="text" label="Title" />
   <.input field={f[:description]} type="text" label="Description" />
   <.input field={f[:priority]} type="select" options={priority_opts(@changeset)} />
+  <.input field={f[:state]} type="select" options={state_opts(@changeset)} />
   
   <:actions>
     <.button>Save Project</.button>

@@ -10,9 +10,10 @@
 <.table id="projects" rows={@projects} row_click={&JS.navigate(~p"/projects/#{&1}")}>
   <:col :let={project} label="Title"><%= project.title %></:col>
   <:col :let={project} label="Description"><%= project.description %></:col>
-  <:col :let={project} label="Priority"><%= capitalize_atom(project.priority) %></:col>
+  <:col :let={project} label="Priority"><%= capitalize_priority(project.priority) %></:col>
   <:col :let={project} label="Created At"><%= project.inserted_at %></:col>
   <:col :let={project} label="Updated At"><%= project.updated_at %></:col>
+  <:col :let={project} label="State"><%= capitalize_state(project.state) %></:col>
   <:action :let={project}>
     <div class="sr-only">
       <.link navigate={~p"/projects/#{project}"}>Show</.link>

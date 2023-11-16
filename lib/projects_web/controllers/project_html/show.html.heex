@@ -11,9 +11,10 @@
 <.list>
   <:item title="Title"><%= @project.title %></:item>
   <:item title="Description"><%= @project.description %></:item>
-  <:item title="Priority"><%= capitalize_atom(@project.priority) %></:item>
+  <:item title="Priority"><%= capitalize_priority(@project.priority) %></:item>
   <:item title="Created At"><%= @project.inserted_at %></:item>
   <:item title="Updated At"><%= @project.updated_at %></:item>
+  <:item title="State"><%= capitalize_state(@project.state) %></:item>
 </.list>
 
 <.back navigate={~p"/projects"}>Back to projects</.back>
