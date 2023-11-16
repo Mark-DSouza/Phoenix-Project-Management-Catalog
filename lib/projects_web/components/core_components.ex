@@ -365,6 +365,23 @@ defmodule ProjectsWeb.CoreComponents do
     """
   end
 
+  def input(%{type: "radio"} = assigns) do
+    ~H"""
+    <div phx-feedback-for={@name}>
+      <.label for={@id}><%= @label %></.label>
+      <input
+        type="radio"
+        id={@id}
+        name={@name}
+        value={@value}
+        checked={@checked}
+        class="rounded border-zinc-300 text-zinc-900 focus:ring-0"
+        {@rest}
+      />
+    </div>
+    """
+  end
+
   # All other inputs text, datetime-local, url, password, etc. are handled here...
   def input(assigns) do
     ~H"""
@@ -384,6 +401,39 @@ defmodule ProjectsWeb.CoreComponents do
         {@rest}
       />
       <.error :for={msg <- @errors}><%= msg %></.error>
+    </div>
+    """
+  end
+
+
+  @doc """
+  Renders a fieldset with multiple radio buttons representing `Ecto.Enum` fields.
+  note: string interpolation of `@field.value` is because it can switch from an atom to string
+        depending on whether it came from the database or form
+  """
+  attr :field, Phoenix.HTML.FormField, doc: "a form field struct retrieved from the form, for example: @form[:email]"
+  attr :options, :list, doc: "the options for the radio buttons in the fieldset"
+  attr :checked_value, :string, doc: "the currently checked value"
+  def radio_fieldset(%{field: %Phoenix.HTML.FormField{}} = assigns) do
+    ~H"""
+    <div phx-feedback-for={@field.name}>
+      <.input :for={option <- @options}
+        field={@field}
+        id={"#{@field.id}_#{option}"}
+        type="radio"
+        label={String.capitalize(option)}
+        value={option}
+        checked={(@checked_value == option) || (@field.value == String.to_atom(option))}
+      />
+      <%!-- Enum.map(field.errors, &translate_error(&1)) --%>
+
+      <%= if @field.errors != [] do %>
+        <p class="mt-3 flex gap-3 text-sm leading-6 text-rose-600 phx-no-feedback:hidden">
+          <.icon name="hero-exclamation-circle-mini" class="mt-0.5 h-5 w-5 flex-none" />
+          Please select one Priority
+        </p>
+      <% end %>
+      <%!-- <.error :for={msg <- @field.errors}><%= msg %></.error> --%>
     </div>
     """
   end

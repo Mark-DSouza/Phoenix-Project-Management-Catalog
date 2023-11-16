@@ -3,8 +3,8 @@ defmodule Projects.Repo.Migrations.CreateProjects do
 
   def change do
     create table(:projects) do
-      add :title, :string
-      add :description, :string
+      add :title, :string, null: false
+      add :description, :string, null: false
 
       timestamps(type: :utc_datetime)
     end
