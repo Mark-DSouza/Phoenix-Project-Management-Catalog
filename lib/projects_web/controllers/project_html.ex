@@ -19,30 +19,16 @@ defmodule ProjectsWeb.ProjectHTML do
       |> Enum.join(" ")
   end
 
-  def priority_opts(changeset) do
-    existing_priority = changeset |> Ecto.Changeset.get_change(:priority, [])
+  def select_options(changeset, field) do
+    existing_selection = changeset |> Ecto.Changeset.get_change(field, [])
 
     Enum.map(
-      Ecto.Enum.values(Projects.Checklist.Project, :priority),
-      fn priority_value ->
+      Ecto.Enum.values(Projects.Checklist.Project, field),
+      fn value ->
       [
-        key: capitalize_atom(priority_value),
-        value: priority_value,
-        selected: priority_value == existing_priority
-      ] end
-    )
-  end
-
-  def state_opts(changeset) do
-    existing_state = changeset |> Ecto.Changeset.get_change(:state, [])
-
-    Enum.map(
-      Ecto.Enum.values(Projects.Checklist.Project, :state),
-      fn state_value ->
-      [
-        key: capitalize_atom(state_value),
-        value: state_value,
-        selected: state_value == existing_state
+        key: capitalize_atom(value),
+        value: value,
+        selected: value == existing_selection
       ] end
     )
   end
